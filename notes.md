@@ -4,6 +4,10 @@ As part of Wave 0, please fill out notes for each of the below files. They are i
 PLEASE MAKE FREQUENT COMMITS AS YOU FILL OUT THIS FILE.
 
 ## App.java
+- This file is the starting point of the program. It's where execution begins. 
+- Looks like it uses the command line arguments to create objects and start the truffula app.
+- Arguments like -h triggers specific actions, like showing showing hidden files.
+- It's where we call our methods. 
 
 ## ConsoleColor.java
 
