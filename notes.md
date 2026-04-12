@@ -41,3 +41,6 @@ that code is associated with will turn the text that color
 - There is what looks like a helper method to check if the current operating system is windows and another helper method to make sure tests work on windows and UNIX-like systems.
 
 ## AlphabeticalFileSorter.java
+- Sorts the files in the directory tree in alphabetical order by name ignoring case. 
+- Returns a sorted array of files
+- Takes in a single argument of File[] called 'files'
