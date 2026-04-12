@@ -23,6 +23,10 @@ that code is associated with will turn the text that color
 - Sets the color of the text depending on the ansi code
 
 ## TruffulaOptions.java / TruffulaOptionsTest.java
+- This file controls where the directory tree starts printing from
+- Uses flags to determine whether to show hidden files or use color for text
+- Throws exceptions for unknown arguments and missing directories
+- Constructs an object with the values that were entered into the terminal regarding where to start building the tree from and whether to show hidden files and use color so other parts of the program can use them. 
 
 ## TruffulaPrinter.java / TruffulaPrinterTest.java
 
