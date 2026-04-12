@@ -4,7 +4,7 @@ As part of Wave 0, please fill out notes for each of the below files. They are i
 PLEASE MAKE FREQUENT COMMITS AS YOU FILL OUT THIS FILE.
 
 ## App.java
-- This file is the starting point of the program. It's where execution begins. 
+- This class is the starting point of the program. It's where execution begins. 
 - Looks like it uses the command line arguments to create objects and start the truffula app.
 - Arguments like -h triggers specific actions, like showing showing hidden files.
 - It's where we call our methods. 
@@ -17,17 +17,25 @@ that code is associated with will turn the text that color
 - I think the purpose of enum is to allow the program to use and reference these colors when printing the directory tree
 
 ## ColorPrinter.java / ColorPrinterTest.java
-- This file uses PrintStream to print text to the terminal using ansi escape codes. 
+- This class uses PrintStream to print text to the terminal using ansi escape codes. 
 - There's an option to keep text color active or not
 - Gets the ansi codes from ConsoleColor.java
 - Sets the color of the text depending on the ansi code
 
 ## TruffulaOptions.java / TruffulaOptionsTest.java
-- This file controls where the directory tree starts printing from
+- This class controls where the directory tree starts printing from
 - Uses flags to determine whether to show hidden files or use color for text
 - Throws exceptions for unknown arguments and missing directories
 - Constructs an object with the values that were entered into the terminal regarding where to start building the tree from and whether to show hidden files and use color so other parts of the program can use them. 
 
 ## TruffulaPrinter.java / TruffulaPrinterTest.java
+- TruffulaPrinter.java handles printing the directory tree structure
+- It uses TruffulaOptions to determine how the tree shuold be printed (like showing hidden files, using color, and where to start).
+- It uses ColorPrinter to handle colored output.
+- colorSequence uses multiple colors to show the differet levels of the directory tree
+- It's where the logic lives for buidling and displaying the tree.
+- TruffulaPrinterTest.java is used to make sure TruffulaPrinter prints the directory tree correctly.
+- There is a created directory structure using all of the associated classes and checks if the output matches the created directory. 
+- There is what looks like a helper method to check if the current operating system is windows and another helper method to make sure tests work on windows and UNIX-like systems.
 
 ## AlphabeticalFileSorter.java
