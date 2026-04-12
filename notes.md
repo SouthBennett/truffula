@@ -17,6 +17,10 @@ that code is associated with will turn the text that color
 - I think the purpose of enum is to allow the program to use and reference these colors when printing the directory tree
 
 ## ColorPrinter.java / ColorPrinterTest.java
+- This file uses PrintStream to print text to the terminal using ansi escape codes. 
+- There's an option to keep text color active or not
+- Gets the ansi codes from ConsoleColor.java
+- Sets the color of the text depending on the ansi code
 
 ## TruffulaOptions.java / TruffulaOptionsTest.java
 
