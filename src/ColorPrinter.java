@@ -121,9 +121,13 @@ public class ColorPrinter {
     ColorPrinter printer = new ColorPrinter(System.out);
 
     printer.setCurrentColor(ConsoleColor.GREEN);
-    printer.print("This message should be green", false);
-    printer.print("still green", true);
-    printer.print("now default\n");
+    printer.print("This message should be green", true);
+
+    printer.setCurrentColor(ConsoleColor.WHITE);
+    printer.print("This message should be white", true);
+
+    
+
 
     // System.out.print("\033[0;32mGREEN TEXT\033[0m\n");
     // System.out.print("NORMAL TEXT\n");
