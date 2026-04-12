@@ -17,16 +17,18 @@ that code is associated with will turn the text that color
 - I think the purpose of enum is to allow the program to use and reference these colors when printing the directory tree
 
 ## ColorPrinter.java / ColorPrinterTest.java
-- This class uses PrintStream to print text to the terminal using ansi escape codes. 
+- ColorPrinter.java uses PrintStream to print text to the terminal using ansi escape codes. 
 - There's an option to keep text color active or not
 - Gets the ansi codes from ConsoleColor.java
 - Sets the color of the text depending on the ansi code
+- ColorPrinterTest.java runs a test to make sure you can set the color to a text, print that color text and also reset the color.
 
 ## TruffulaOptions.java / TruffulaOptionsTest.java
-- This class controls where the directory tree starts printing from
+- TruffulaOptions.java controls where the directory tree starts printing from
 - Uses flags to determine whether to show hidden files or use color for text
 - Throws exceptions for unknown arguments and missing directories
 - Constructs an object with the values that were entered into the terminal regarding where to start building the tree from and whether to show hidden files and use color so other parts of the program can use them. 
+- TruffulaOptionsTest.java creates a new directory with the arguments to have no color text, to show hidden files and gives it a root to start building from and checks if the directory is built correctly.
 
 ## TruffulaPrinter.java / TruffulaPrinterTest.java
 - TruffulaPrinter.java handles printing the directory tree structure
