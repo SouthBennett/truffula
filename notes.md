@@ -10,6 +10,11 @@ PLEASE MAKE FREQUENT COMMITS AS YOU FILL OUT THIS FILE.
 - It's where we call our methods. 
 
 ## ConsoleColor.java
+- It looks like we have a fixed set of colors.
+- Each color is tied to an ansi escape code
+- When we enter an ansi escape code into the terminal whatever color
+that code is associated with will turn the text that color
+- I think the purpose of enum is to allow the program to use and reference these colors when printing the directory tree
 
 ## ColorPrinter.java / ColorPrinterTest.java
 
