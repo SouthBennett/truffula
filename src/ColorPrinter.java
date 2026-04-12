@@ -87,6 +87,14 @@ public class ColorPrinter {
    */
   public void print(String message, boolean reset) {
     // TODO: Implement this!
+    String buildMessage = "";
+    buildMessage += currentColor.getCode();
+    buildMessage += message;
+    if (reset == true) {
+      buildMessage += ConsoleColor.RESET.getCode();
+    }
+    printStream.print(buildMessage);
+    // System.out.println("DEBUG: " + buildMessage);
   }
 
   /**
@@ -108,5 +116,17 @@ public class ColorPrinter {
   public ColorPrinter(PrintStream printStream, ConsoleColor color) {
     this.printStream = printStream;
     this.currentColor = color;
+  }
+  public static void main(String[] args) {
+    ColorPrinter printer = new ColorPrinter(System.out);
+
+    printer.setCurrentColor(ConsoleColor.GREEN);
+    printer.print("This message should be green", false);
+    printer.print("still green", true);
+    printer.print("now default\n");
+
+    // System.out.print("\033[0;32mGREEN TEXT\033[0m\n");
+    // System.out.print("NORMAL TEXT\n");
+    
   }
 }
