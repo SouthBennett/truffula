@@ -156,10 +156,10 @@ public class TruffulaPrinterTest {
         File myFolder = new File(tempDir, "myFolder");
         assertTrue(myFolder.mkdir());
 
-        File file = new File(myFolder, "textFile.txt");
+        File file = new File(myFolder, "textFile.text");
         file.createNewFile();
 
-        TruffulaOptions options = new TruffulaOptions(myFolder, false, true);
+        TruffulaOptions options = new TruffulaOptions(myFolder, false, false);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(baos);
@@ -170,7 +170,7 @@ public class TruffulaPrinterTest {
         printer.printTree();
 
         // Retrieve printed output
-        String output = baos.toString();
+        String output = baos.toString().replaceAll("\u001B\\[[0-9;]*m", "");
         String nl = System.lineSeparator();
 
         // Expected output

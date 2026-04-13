@@ -117,20 +117,26 @@ public class TruffulaPrinter {
   }
 
   private void printTreeHelper(File file, int depth) {
+    String indent = "";
+
+    for (int i = 0; i < depth; i++) {
+      indent += "   ";
+    }
+
     String name = file.getName();
 
     if (file.isDirectory()) {
       name += "/";
     }
 
-    out.println(name);
+    out.println(indent + name);
 
     if (file.isDirectory()) {
       File[] children = file.listFiles();
 
       if (children != null) {
         for (File child : children) {
-          out.println(child.getName());
+          printTreeHelper(child, depth + 1);
         }
       }
     }
