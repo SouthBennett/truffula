@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -98,5 +99,30 @@ public class TruffulaOptionsTest {
     assertEquals(directory.getAbsolutePath(), options.getRoot().getAbsolutePath());
     assertTrue(options.isShowHidden());
     assertFalse(options.isUseColor());
+  }
+
+  @Test 
+  void testUnknownFlag(@TempDir File tempDir) {
+    // Arrange
+    File directory = new File(tempDir, "subfolder");
+    directory.mkdir();
+    String directoryPath = directory.getAbsolutePath();
+    String[] args = {"-x", directoryPath};
+
+    // Act and Assert
+    assertThrows(IllegalArgumentException.class, () -> {
+      new TruffulaOptions(args);
+    });
+  }
+
+  @Test
+  void testMissingPath(@TempDir File tempDir) {
+    // Arrange
+    String[] args = {};
+
+    // Act and Assert
+    assertThrows(IllegalArgumentException.class, () -> {
+      new TruffulaOptions(args);
+    });
   }
 }
