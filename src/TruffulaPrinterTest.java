@@ -156,7 +156,7 @@ public class TruffulaPrinterTest {
         File myFolder = new File(tempDir, "myFolder");
         assertTrue(myFolder.mkdir());
 
-        File file = new File(myFolder, "textFile.text");
+        File file = new File(myFolder, "textFile.txt");
         file.createNewFile();
 
         TruffulaOptions options = new TruffulaOptions(myFolder, false, false);
@@ -170,13 +170,14 @@ public class TruffulaPrinterTest {
         printer.printTree();
 
         // Retrieve printed output
+        System.out.println(baos.toString().replaceAll("\u001B\\[[0-9;]*m", ""));
         String output = baos.toString().replaceAll("\u001B\\[[0-9;]*m", "");
         String nl = System.lineSeparator();
 
         // Expected output
         StringBuilder expected = new StringBuilder();
         expected.append("myFolder/").append(nl);
-        expected.append("   textFile.text").append(nl);
+        expected.append("   textFile.txt").append(nl);
 
         // Assert 
         assertEquals(expected.toString(), output);
