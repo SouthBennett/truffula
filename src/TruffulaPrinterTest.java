@@ -182,4 +182,42 @@ public class TruffulaPrinterTest {
         // Assert 
         assertEquals(expected.toString(), output);
     }
+
+    @Test
+    public void testPrintTree_Nested(@TempDir File tempDir) throws IOException {
+        // Arrange
+        File myFolder = new File(tempDir, "myFolder");
+        assertTrue(myFolder.mkdir());
+
+        File subFolder = new File(myFolder, "subFolder");
+        assertTrue(subFolder.mkdir());
+
+        File file = new File(subFolder, "textFile.txt");
+        file.createNewFile();
+
+        TruffulaOptions options = new TruffulaOptions(myFolder, false, false);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(baos);
+
+        TruffulaPrinter printer = new TruffulaPrinter(options, printStream);
+
+        // Act 
+        printer.printTree();
+
+        // Retrieve printed output
+        System.out.println(baos.toString().replaceAll("\u001B\\[[0-9;]*m", ""));
+        String output = baos.toString().replaceAll("\u001B\\[[0-9;]*m", "");
+        String nl = System.lineSeparator();
+
+        // Expected output
+        StringBuilder expected = new StringBuilder();
+        expected.append("myFolder/").append(nl);
+        expected.append("   subFolder/").append(nl);
+        expected.append("      textFile.txt").append(nl);
+
+        // Assert 
+        assertEquals(expected.toString(), output);
+    }
+
 }
