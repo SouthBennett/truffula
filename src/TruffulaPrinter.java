@@ -124,5 +124,15 @@ public class TruffulaPrinter {
     }
 
     out.println(name);
+
+    if (file.isDirectory()) {
+      File[] children = file.listFiles();
+
+      if (children != null) {
+        for (File child : children) {
+          out.println(child.getName());
+        }
+      }
+    }
   }
 }
