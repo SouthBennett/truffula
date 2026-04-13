@@ -125,4 +125,15 @@ public class TruffulaOptionsTest {
       new TruffulaOptions(args);
     });
   }
+
+  @Test
+  void testInvalidPath(@TempDir File tempDir) {
+    // Arrange
+    String[] args = {"/dummy/path"};
+
+    // Act and Assert
+    assertThrows(FileNotFoundException.class, () -> {
+      new TruffulaOptions(args);
+    });
+  }
 }
