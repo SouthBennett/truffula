@@ -136,6 +136,9 @@ public class TruffulaPrinter {
 
       if (children != null) {
         for (File child : children) {
+          if (!options.isShowHidden() && child.getName().startsWith(".")) {
+            continue;
+          }
           printTreeHelper(child, depth + 1);
         }
       }

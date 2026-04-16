@@ -221,7 +221,7 @@ public class TruffulaPrinterTest {
     }
 
     @Test
-    public void testHiddenFiles_IsHidden(@TempDir File tempDir) throws IOException {
+    public void testHiddenFiles_Excluded(@TempDir File tempDir) throws IOException {
         // Arrange
         File myFolder = new File(tempDir, "myFolder");
         assertTrue(myFolder.mkdir());
@@ -247,6 +247,40 @@ public class TruffulaPrinterTest {
 
         StringBuilder expected = new StringBuilder();
         expected.append("myFolder/").append(nl);
+        expected.append("   seeable.txt").append(nl);
+
+        // Assert
+        assertEquals(expected.toString(), output);
+    }
+
+    @Test
+    public void testHiddenFiles_Included(@TempDir File tempDir) throws IOException {
+        // Arrange
+        File myFolder = new File(tempDir, "myFolder");
+        assertTrue(myFolder.mkdir());
+
+        File seeable = new File(myFolder, "seeable.txt");
+        seeable.createNewFile();
+
+        File hidden = createHiddenFile(myFolder, ".hidden.txt");
+        
+        TruffulaOptions options = new TruffulaOptions(myFolder, true, false);
+        
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(baos);
+
+        TruffulaPrinter printer = new TruffulaPrinter(options, printStream);
+        
+        // Act
+        printer.printTree();
+
+        System.out.println(baos.toString());
+        String output = baos.toString().replaceAll("\u001B\\[[0-9;]*m", "");;
+        String nl = System.lineSeparator();
+
+        StringBuilder expected = new StringBuilder();
+        expected.append("myFolder/").append(nl);
+        expected.append("   .hidden.txt").append(nl);
         expected.append("   seeable.txt").append(nl);
 
         // Assert
