@@ -170,7 +170,7 @@ public class TruffulaPrinterTest {
         printer.printTree();
 
         // Retrieve printed output
-        System.out.println(baos.toString().replaceAll("\u001B\\[[0-9;]*m", ""));
+        System.out.println(baos.toString());
         String output = baos.toString().replaceAll("\u001B\\[[0-9;]*m", "");
         String nl = System.lineSeparator();
 
@@ -206,7 +206,7 @@ public class TruffulaPrinterTest {
         printer.printTree();
 
         // Retrieve printed output
-        System.out.println(baos.toString().replaceAll("\u001B\\[[0-9;]*m", ""));
+        System.out.println(baos.toString());
         String output = baos.toString().replaceAll("\u001B\\[[0-9;]*m", "");
         String nl = System.lineSeparator();
 
@@ -217,6 +217,39 @@ public class TruffulaPrinterTest {
         expected.append("      textFile.txt").append(nl);
 
         // Assert 
+        assertEquals(expected.toString(), output);
+    }
+
+    @Test
+    public void testHiddenFiles_IsHidden(@TempDir File tempDir) throws IOException {
+        // Arrange
+        File myFolder = new File(tempDir, "myFolder");
+        assertTrue(myFolder.mkdir());
+
+        File seeable = new File(myFolder, "seeable.txt");
+        seeable.createNewFile();
+
+        File hidden = createHiddenFile(myFolder, ".hidden.txt");
+        
+        TruffulaOptions options = new TruffulaOptions(myFolder, false, false);
+        
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(baos);
+
+        TruffulaPrinter printer = new TruffulaPrinter(options, printStream);
+        
+        // Act
+        printer.printTree();
+
+        System.out.println(baos.toString());
+        String output = baos.toString().replaceAll("\u001B\\[[0-9;]*m", "");;
+        String nl = System.lineSeparator();
+
+        StringBuilder expected = new StringBuilder();
+        expected.append("myFolder/").append(nl);
+        expected.append("   seeable.txt").append(nl);
+
+        // Assert
         assertEquals(expected.toString(), output);
     }
 
