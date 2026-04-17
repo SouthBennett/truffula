@@ -142,6 +142,7 @@ public class TruffulaPrinter {
       File[] children = file.listFiles();
 
       if (children != null) {
+        children = AlphabeticalFileSorter.sort(children);
         for (File child : children) {
           if (!options.isShowHidden() && child.getName().startsWith(".")) {
             continue;
