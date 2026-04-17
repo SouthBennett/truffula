@@ -129,6 +129,13 @@ public class TruffulaPrinter {
       name += "/";
     }
 
+    if (options.isUseColor()) {
+      ConsoleColor color = colorSequence.get(depth % colorSequence.size());
+      out.setCurrentColor(color);
+    } else {
+      out.setCurrentColor(ConsoleColor.WHITE);
+    }
+    
     out.println(indent + name);
 
     if (file.isDirectory()) {

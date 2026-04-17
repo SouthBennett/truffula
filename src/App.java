@@ -1,3 +1,5 @@
+import java.io.File;
+
 public class App {
   
   /**
@@ -45,8 +47,12 @@ public class App {
     // You should create a TruffulaOptions object using the args and
     // pass it to a new TruffulaPrinter that uses System.out
     // Then, call printTree on the TruffulaPrinter
-    TruffulaOptions options = new TruffulaOptions(args);
+    TruffulaOptions options = new TruffulaOptions(new File("src"), false, true);
     TruffulaPrinter printer = new TruffulaPrinter(options);
     printer.printTree();
+
+    System.out.println("\033[0;31mRED TEST\033[0m");
+    System.out.println("\033[0;32mGREEN TEST\033[0m");
+    System.out.println("\033[0;34mBLUE TEST\033[0m");
   }
 }
