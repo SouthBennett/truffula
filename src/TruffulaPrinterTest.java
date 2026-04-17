@@ -287,4 +287,38 @@ public class TruffulaPrinterTest {
         assertEquals(expected.toString(), output);
     }
 
+    @Test public void testColorOutput_Basic(@TempDir File tempDir) throws IOException {
+        // Arrange
+        File myFolder = new File (tempDir, "myFolder");
+        assertTrue(myFolder.mkdir());
+
+        File file = new File(myFolder, "file.txt");
+        file.createNewFile();
+
+        TruffulaOptions options = new TruffulaOptions(myFolder, false, true);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(baos);
+
+        TruffulaPrinter printer = new TruffulaPrinter(options, printStream);
+
+        // Act
+        printer.printTree();
+
+        String output = baos.toString();
+        String nl = System.lineSeparator();
+
+        ConsoleColor white = ConsoleColor.WHITE;
+        ConsoleColor purple = ConsoleColor.PURPLE;
+        ConsoleColor reset = ConsoleColor.RESET;
+
+        StringBuilder expected = new StringBuilder();
+
+        expected.append(white).append("myFolder/").append(nl).append(reset);
+        expected.append(purple).append("   file.txt").append(nl).append(reset);
+
+        // Assert
+        assertEquals(expected.toString(), output);
+
+    }
 }
